@@ -1,0 +1,484 @@
+/*
+ * tokens.css — devl.dev design system tokens
+ *
+ * Layer 1  Primitives  Raw named values, never used in components directly
+ * Layer 2  Aliases     Semantic names that reference Layer 1 with fallbacks
+ * Layer 3  Components  Component CSS files (separate files) that only read Layer 2
+ */
+
+/* ============================================================
+   LAYER 1 — PRIMITIVES
+   ============================================================ */
+:root {
+
+  /* --- Color primitives --- */
+  --primitive-slate-50:  #F8FAFC;
+  --primitive-slate-100: #F1F5F9;
+  --primitive-slate-200: #E2E8F0;
+  --primitive-slate-300: #CBD5E1;
+  --primitive-slate-400: #94A3B8;
+  --primitive-slate-500: #64748B;
+  --primitive-slate-600: #475569;
+  --primitive-slate-700: #334155;
+  --primitive-slate-800: #1E293B;
+  --primitive-slate-900: #0F172A;
+  --primitive-slate-950: #020617;
+
+  --primitive-indigo-50:  #EEF2FF;
+  --primitive-indigo-100: #E0E7FF;
+  --primitive-indigo-200: #C7D2FE;
+  --primitive-indigo-300: #A5B4FC;
+  --primitive-indigo-400: #818CF8;
+  --primitive-indigo-500: #6366F1;
+  --primitive-indigo-600: #4F46E5;
+  --primitive-indigo-700: #4338CA;
+  --primitive-indigo-800: #3730A3;
+  --primitive-indigo-900: #312E81;
+
+  --primitive-green-50:  #F0FDF4;
+  --primitive-green-100: #DCFCE7;
+  --primitive-green-400: #4ADE80;
+  --primitive-green-500: #22C55E;
+  --primitive-green-600: #16A34A;
+  --primitive-green-700: #15803D;
+
+  --primitive-red-50:  #FEF2F2;
+  --primitive-red-100: #FEE2E2;
+  --primitive-red-400: #F87171;
+  --primitive-red-500: #EF4444;
+  --primitive-red-600: #DC2626;
+  --primitive-red-700: #B91C1C;
+
+  --primitive-amber-50:  #FFFBEB;
+  --primitive-amber-100: #FEF3C7;
+  --primitive-amber-400: #FBBF24;
+  --primitive-amber-500: #F59E0B;
+  --primitive-amber-600: #D97706;
+  --primitive-amber-700: #B45309;
+
+  --primitive-white: #FFFFFF;
+  --primitive-black: #000000;
+
+  /* --- Spacing primitives (8-point grid) --- */
+  --primitive-space-0:  0px;
+  --primitive-space-1:  4px;
+  --primitive-space-2:  8px;
+  --primitive-space-3:  12px;
+  --primitive-space-4:  16px;
+  --primitive-space-5:  20px;
+  --primitive-space-6:  24px;
+  --primitive-space-8:  32px;
+  --primitive-space-10: 40px;
+  --primitive-space-12: 48px;
+  --primitive-space-16: 64px;
+  --primitive-space-20: 80px;
+  --primitive-space-24: 96px;
+  --primitive-space-32: 128px;
+
+  /* --- Typography primitives --- */
+  --primitive-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --primitive-font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  --primitive-font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --primitive-size-xs:   0.75rem;   /* 12px */
+  --primitive-size-sm:   0.875rem;  /* 14px */
+  --primitive-size-base: 1rem;      /* 16px */
+  --primitive-size-lg:   1.125rem;  /* 18px */
+  --primitive-size-xl:   1.25rem;   /* 20px */
+  --primitive-size-2xl:  1.5rem;    /* 24px */
+  --primitive-size-3xl:  1.875rem;  /* 30px */
+  --primitive-size-4xl:  2.25rem;   /* 36px */
+  --primitive-size-5xl:  3rem;      /* 48px */
+  --primitive-size-6xl:  3.75rem;   /* 60px */
+  --primitive-size-7xl:  4.5rem;    /* 72px */
+
+  --primitive-weight-normal:   400;
+  --primitive-weight-medium:   500;
+  --primitive-weight-semibold: 600;
+  --primitive-weight-bold:     700;
+  --primitive-weight-extrabold: 800;
+
+  --primitive-leading-none:    1;
+  --primitive-leading-tight:   1.25;
+  --primitive-leading-snug:    1.375;
+  --primitive-leading-normal:  1.5;
+  --primitive-leading-relaxed: 1.625;
+  --primitive-leading-loose:   2;
+
+  --primitive-tracking-tight:  -0.025em;
+  --primitive-tracking-normal:  0;
+  --primitive-tracking-wide:    0.025em;
+  --primitive-tracking-wider:   0.05em;
+
+  /* --- Border radius primitives --- */
+  --primitive-radius-none: 0px;
+  --primitive-radius-sm:   2px;
+  --primitive-radius-base: 4px;
+  --primitive-radius-md:   6px;
+  --primitive-radius-lg:   8px;
+  --primitive-radius-xl:   12px;
+  --primitive-radius-2xl:  16px;
+  --primitive-radius-3xl:  24px;
+  --primitive-radius-full: 9999px;
+
+  /* --- Elevation / shadow primitives --- */
+  --primitive-shadow-none: 0 0 #0000;
+  --primitive-shadow-sm:   0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --primitive-shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --primitive-shadow-md:   0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --primitive-shadow-lg:   0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --primitive-shadow-xl:   0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --primitive-shadow-2xl:  0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --primitive-shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+
+  /* --- Z-index primitives --- */
+  --primitive-z-0:    0;
+  --primitive-z-10:   10;
+  --primitive-z-20:   20;
+  --primitive-z-30:   30;
+  --primitive-z-40:   40;
+  --primitive-z-50:   50;
+  --primitive-z-100:  100;
+  --primitive-z-200:  200;
+  --primitive-z-300:  300;
+  --primitive-z-400:  400;
+  --primitive-z-500:  500;
+  --primitive-z-600:  600;
+  --primitive-z-700:  700;
+  --primitive-z-auto: auto;
+
+  /* --- Motion primitives --- */
+  --primitive-duration-0:       0ms;
+  --primitive-duration-fast:    100ms;
+  --primitive-duration-normal:  150ms;
+  --primitive-duration-slow:    300ms;
+  --primitive-duration-slower:  500ms;
+  --primitive-duration-slowest: 700ms;
+
+  --primitive-ease-linear:  linear;
+  --primitive-ease-in:      cubic-bezier(0.4, 0, 1, 1);
+  --primitive-ease-out:     cubic-bezier(0, 0, 0.2, 1);
+  --primitive-ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1);
+  --primitive-ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --primitive-ease-bounce:  cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ============================================================
+   LAYER 2 — SEMANTIC ALIASES (light mode, default)
+   Components MUST use these, never Layer 1 directly.
+   ============================================================ */
+:root {
+
+  /* --- Background colors --- */
+  --color-bg-canvas:   var(--primitive-slate-50,   #F8FAFC);
+  --color-bg-surface:  var(--primitive-white,       #FFFFFF);
+  --color-bg-elevated: var(--primitive-white,       #FFFFFF);
+  --color-bg-inset:    var(--primitive-slate-100,   #F1F5F9);
+  --color-bg-subtle:   var(--primitive-slate-50,    #F8FAFC);
+  --color-bg-overlay:  rgb(15 23 42 / 0.6);
+  --color-bg-code:     var(--primitive-slate-900,   #0F172A);
+
+  /* --- Text colors --- */
+  --color-text-primary:   var(--primitive-slate-900, #0F172A);
+  --color-text-secondary: var(--primitive-slate-600, #475569);
+  --color-text-tertiary:  var(--primitive-slate-400, #94A3B8);
+  --color-text-disabled:  var(--primitive-slate-300, #CBD5E1);
+  --color-text-inverse:   var(--primitive-white,     #FFFFFF);
+  --color-text-code:      var(--primitive-indigo-300, #A5B4FC);
+  --color-text-on-code:   var(--primitive-slate-100, #F1F5F9);
+
+  /* --- Link colors --- */
+  --color-link-default: var(--primitive-indigo-600, #4F46E5);
+  --color-link-hover:   var(--primitive-indigo-700, #4338CA);
+  --color-link-active:  var(--primitive-indigo-800, #3730A3);
+  --color-link-visited: var(--primitive-indigo-800, #3730A3);
+
+  /* --- Border colors --- */
+  --color-border-default: var(--primitive-slate-200, #E2E8F0);
+  --color-border-strong:  var(--primitive-slate-300, #CBD5E1);
+  --color-border-muted:   var(--primitive-slate-100, #F1F5F9);
+  --color-border-focus:   var(--primitive-indigo-500, #6366F1);
+  --color-border-error:   var(--primitive-red-500,    #EF4444);
+  --color-border-success: var(--primitive-green-500,  #22C55E);
+
+  /* --- Interactive / accent colors (primary = indigo) --- */
+  --color-interactive-primary:          var(--primitive-indigo-600, #4F46E5);
+  --color-interactive-primary-hover:    var(--primitive-indigo-700, #4338CA);
+  --color-interactive-primary-active:   var(--primitive-indigo-800, #3730A3);
+  --color-interactive-primary-subtle:   var(--primitive-indigo-50,  #EEF2FF);
+  --color-interactive-primary-fg:       var(--primitive-white,      #FFFFFF);
+  --color-interactive-primary-border:   var(--primitive-indigo-600, #4F46E5);
+
+  --color-interactive-secondary:        var(--primitive-white,      #FFFFFF);
+  --color-interactive-secondary-hover:  var(--primitive-slate-50,   #F8FAFC);
+  --color-interactive-secondary-active: var(--primitive-slate-100,  #F1F5F9);
+  --color-interactive-secondary-fg:     var(--primitive-slate-700,  #334155);
+  --color-interactive-secondary-border: var(--primitive-slate-200,  #E2E8F0);
+
+  --color-interactive-ghost-hover:  var(--primitive-slate-100, #F1F5F9);
+  --color-interactive-ghost-active: var(--primitive-slate-200, #E2E8F0);
+  --color-interactive-ghost-fg:     var(--primitive-slate-700, #334155);
+
+  --color-interactive-danger:        var(--primitive-red-600,   #DC2626);
+  --color-interactive-danger-hover:  var(--primitive-red-700,   #B91C1C);
+  --color-interactive-danger-active: var(--primitive-red-700,   #B91C1C);
+  --color-interactive-danger-subtle: var(--primitive-red-50,    #FEF2F2);
+  --color-interactive-danger-fg:     var(--primitive-white,     #FFFFFF);
+  --color-interactive-danger-border: var(--primitive-red-600,   #DC2626);
+
+  /* --- Status / feedback colors --- */
+  --color-status-success:          var(--primitive-green-500, #22C55E);
+  --color-status-success-fg:       var(--primitive-white,     #FFFFFF);
+  --color-status-success-subtle:   var(--primitive-green-50,  #F0FDF4);
+  --color-status-success-text:     var(--primitive-green-700, #15803D);
+  --color-status-success-border:   var(--primitive-green-500, #22C55E);
+
+  --color-status-warning:          var(--primitive-amber-500, #F59E0B);
+  --color-status-warning-fg:       var(--primitive-white,     #FFFFFF);
+  --color-status-warning-subtle:   var(--primitive-amber-50,  #FFFBEB);
+  --color-status-warning-text:     var(--primitive-amber-700, #B45309);
+  --color-status-warning-border:   var(--primitive-amber-500, #F59E0B);
+
+  --color-status-error:            var(--primitive-red-500,   #EF4444);
+  --color-status-error-fg:         var(--primitive-white,     #FFFFFF);
+  --color-status-error-subtle:     var(--primitive-red-50,    #FEF2F2);
+  --color-status-error-text:       var(--primitive-red-700,   #B91C1C);
+  --color-status-error-border:     var(--primitive-red-500,   #EF4444);
+
+  --color-status-info:             var(--primitive-indigo-500, #6366F1);
+  --color-status-info-fg:          var(--primitive-white,      #FFFFFF);
+  --color-status-info-subtle:      var(--primitive-indigo-50,  #EEF2FF);
+  --color-status-info-text:        var(--primitive-indigo-700, #4338CA);
+  --color-status-info-border:      var(--primitive-indigo-500, #6366F1);
+
+  /* --- Spacing aliases --- */
+  --space-1:  var(--primitive-space-1,  4px);
+  --space-2:  var(--primitive-space-2,  8px);
+  --space-3:  var(--primitive-space-3,  12px);
+  --space-4:  var(--primitive-space-4,  16px);
+  --space-5:  var(--primitive-space-5,  20px);
+  --space-6:  var(--primitive-space-6,  24px);
+  --space-8:  var(--primitive-space-8,  32px);
+  --space-10: var(--primitive-space-10, 40px);
+  --space-12: var(--primitive-space-12, 48px);
+  --space-16: var(--primitive-space-16, 64px);
+  --space-20: var(--primitive-space-20, 80px);
+  --space-24: var(--primitive-space-24, 96px);
+  --space-32: var(--primitive-space-32, 128px);
+
+  /* Component-role spacing shortcuts */
+  --space-component-xs:  var(--space-1,  4px);
+  --space-component-sm:  var(--space-2,  8px);
+  --space-component-md:  var(--space-3,  12px);
+  --space-component-lg:  var(--space-4,  16px);
+  --space-component-xl:  var(--space-6,  24px);
+  --space-section-sm:    var(--space-8,  32px);
+  --space-section-md:    var(--space-12, 48px);
+  --space-section-lg:    var(--space-16, 64px);
+  --space-section-xl:    var(--space-24, 96px);
+
+  /* --- Typography aliases --- */
+  --font-family-body:    var(--primitive-font-sans,    'Inter', sans-serif);
+  --font-family-heading: var(--primitive-font-display, 'Inter', sans-serif);
+  --font-family-code:    var(--primitive-font-mono,    'JetBrains Mono', monospace);
+
+  --font-size-xs:   var(--primitive-size-xs,   0.75rem);
+  --font-size-sm:   var(--primitive-size-sm,   0.875rem);
+  --font-size-base: var(--primitive-size-base, 1rem);
+  --font-size-lg:   var(--primitive-size-lg,   1.125rem);
+  --font-size-xl:   var(--primitive-size-xl,   1.25rem);
+  --font-size-2xl:  var(--primitive-size-2xl,  1.5rem);
+  --font-size-3xl:  var(--primitive-size-3xl,  1.875rem);
+  --font-size-4xl:  var(--primitive-size-4xl,  2.25rem);
+  --font-size-5xl:  var(--primitive-size-5xl,  3rem);
+  --font-size-6xl:  var(--primitive-size-6xl,  3.75rem);
+
+  --font-weight-normal:   var(--primitive-weight-normal,   400);
+  --font-weight-medium:   var(--primitive-weight-medium,   500);
+  --font-weight-semibold: var(--primitive-weight-semibold, 600);
+  --font-weight-bold:     var(--primitive-weight-bold,     700);
+
+  --line-height-tight:   var(--primitive-leading-tight,   1.25);
+  --line-height-snug:    var(--primitive-leading-snug,    1.375);
+  --line-height-normal:  var(--primitive-leading-normal,  1.5);
+  --line-height-relaxed: var(--primitive-leading-relaxed, 1.625);
+
+  --letter-spacing-tight:  var(--primitive-tracking-tight,  -0.025em);
+  --letter-spacing-normal: var(--primitive-tracking-normal,  0);
+  --letter-spacing-wide:   var(--primitive-tracking-wide,    0.025em);
+
+  /* --- Border radius aliases --- */
+  --radius-none: var(--primitive-radius-none, 0px);
+  --radius-sm:   var(--primitive-radius-sm,   2px);
+  --radius-base: var(--primitive-radius-base, 4px);
+  --radius-md:   var(--primitive-radius-md,   6px);
+  --radius-lg:   var(--primitive-radius-lg,   8px);
+  --radius-xl:   var(--primitive-radius-xl,   12px);
+  --radius-2xl:  var(--primitive-radius-2xl,  16px);
+  --radius-3xl:  var(--primitive-radius-3xl,  24px);
+  --radius-full: var(--primitive-radius-full, 9999px);
+
+  /* Component radius shortcuts */
+  --radius-button:  var(--radius-md,   6px);
+  --radius-input:   var(--radius-md,   6px);
+  --radius-card:    var(--radius-xl,   12px);
+  --radius-badge:   var(--radius-full, 9999px);
+  --radius-modal:   var(--radius-2xl,  16px);
+  --radius-tooltip: var(--radius-md,   6px);
+  --radius-code:    var(--radius-lg,   8px);
+  --radius-avatar:  var(--radius-full, 9999px);
+
+  /* --- Elevation / shadow aliases --- */
+  --elevation-none:   var(--primitive-shadow-none, 0 0 #0000);
+  --elevation-xs:     var(--primitive-shadow-sm,   0 1px 2px 0 rgb(0 0 0 / 0.05));
+  --elevation-sm:     var(--primitive-shadow-base, 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1));
+  --elevation-md:     var(--primitive-shadow-md,   0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1));
+  --elevation-lg:     var(--primitive-shadow-lg,   0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1));
+  --elevation-xl:     var(--primitive-shadow-xl,   0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1));
+  --elevation-2xl:    var(--primitive-shadow-2xl,  0 25px 50px -12px rgb(0 0 0 / 0.25));
+  --elevation-inner:  var(--primitive-shadow-inner, inset 0 2px 4px 0 rgb(0 0 0 / 0.05));
+
+  /* Component elevation shortcuts */
+  --elevation-card:    var(--elevation-sm);
+  --elevation-card-hover: var(--elevation-md);
+  --elevation-dropdown: var(--elevation-lg);
+  --elevation-modal:   var(--elevation-xl);
+  --elevation-toast:   var(--elevation-lg);
+
+  /* --- Z-index aliases --- */
+  --z-base:     var(--primitive-z-0,   0);
+  --z-raised:   var(--primitive-z-10,  10);
+  --z-dropdown: var(--primitive-z-100, 100);
+  --z-sticky:   var(--primitive-z-200, 200);
+  --z-overlay:  var(--primitive-z-300, 300);
+  --z-modal:    var(--primitive-z-400, 400);
+  --z-popover:  var(--primitive-z-500, 500);
+  --z-toast:    var(--primitive-z-600, 600);
+  --z-tooltip:  var(--primitive-z-700, 700);
+
+  /* --- Motion aliases --- */
+  --duration-instant: var(--primitive-duration-0,       0ms);
+  --duration-fast:    var(--primitive-duration-fast,    100ms);
+  --duration-normal:  var(--primitive-duration-normal,  150ms);
+  --duration-slow:    var(--primitive-duration-slow,    300ms);
+  --duration-slower:  var(--primitive-duration-slower,  500ms);
+
+  --ease-default: var(--primitive-ease-in-out, cubic-bezier(0.4, 0, 0.2, 1));
+  --ease-in:      var(--primitive-ease-in,     cubic-bezier(0.4, 0, 1, 1));
+  --ease-out:     var(--primitive-ease-out,    cubic-bezier(0, 0, 0.2, 1));
+  --ease-spring:  var(--primitive-ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+
+  /* Transition shorthands */
+  --transition-colors: color var(--duration-normal) var(--ease-default),
+                       background-color var(--duration-normal) var(--ease-default),
+                       border-color var(--duration-normal) var(--ease-default),
+                       fill var(--duration-normal) var(--ease-default);
+  --transition-opacity:   opacity var(--duration-normal) var(--ease-default);
+  --transition-shadow:    box-shadow var(--duration-normal) var(--ease-default);
+  --transition-transform: transform var(--duration-normal) var(--ease-default);
+  --transition-all:       all var(--duration-normal) var(--ease-default);
+
+  /* --- Typography extras --- */
+  --font-size-2xs:            0.65rem;
+  --font-size-code-relative:  0.9em;
+
+  /* --- Focus ring --- */
+  --focus-ring-width:  2px;
+  --focus-ring-offset: 2px;
+  --focus-ring-color:  var(--color-border-focus, #6366F1);
+  --focus-ring-shadow:       0 0 0 var(--focus-ring-width) color-mix(in srgb, var(--focus-ring-color) 20%, transparent);
+  --focus-ring-error-shadow: 0 0 0 var(--focus-ring-width) color-mix(in srgb, var(--color-status-error) 20%, transparent);
+
+  /* --- Layout --- */
+  --layout-max-width:     1280px;
+  --layout-content-width: 768px;
+  --layout-sidebar-width: 256px;
+  --layout-nav-height:    64px;
+}
+
+/* ============================================================
+   DARK MODE OVERRIDES — Layer 2 aliases only
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-canvas:   var(--primitive-slate-950, #020617);
+    --color-bg-surface:  var(--primitive-slate-900, #0F172A);
+    --color-bg-elevated: var(--primitive-slate-800, #1E293B);
+    --color-bg-inset:    var(--primitive-slate-800, #1E293B);
+    --color-bg-subtle:   var(--primitive-slate-900, #0F172A);
+    --color-bg-overlay:  rgb(2 6 23 / 0.7);
+    --color-bg-code:     var(--primitive-slate-950, #020617);
+
+    --color-text-primary:   var(--primitive-slate-50,  #F8FAFC);
+    --color-text-secondary: var(--primitive-slate-300, #CBD5E1);
+    --color-text-tertiary:  var(--primitive-slate-500, #64748B);
+    --color-text-disabled:  var(--primitive-slate-600, #475569);
+    --color-text-inverse:   var(--primitive-slate-900, #0F172A);
+
+    --color-link-default: var(--primitive-indigo-400, #818CF8);
+    --color-link-hover:   var(--primitive-indigo-300, #A5B4FC);
+    --color-link-active:  var(--primitive-indigo-200, #C7D2FE);
+
+    --color-border-default: var(--primitive-slate-700, #334155);
+    --color-border-strong:  var(--primitive-slate-600, #475569);
+    --color-border-muted:   var(--primitive-slate-800, #1E293B);
+
+    --color-interactive-secondary:        var(--primitive-slate-800, #1E293B);
+    --color-interactive-secondary-hover:  var(--primitive-slate-700, #334155);
+    --color-interactive-secondary-active: var(--primitive-slate-600, #475569);
+    --color-interactive-secondary-fg:     var(--primitive-slate-200, #E2E8F0);
+    --color-interactive-secondary-border: var(--primitive-slate-600, #475569);
+
+    --color-interactive-ghost-hover:  var(--primitive-slate-800, #1E293B);
+    --color-interactive-ghost-active: var(--primitive-slate-700, #334155);
+    --color-interactive-ghost-fg:     var(--primitive-slate-300, #CBD5E1);
+
+    --elevation-xs:     0 1px 2px 0 rgb(0 0 0 / 0.2);
+    --elevation-sm:     0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+    --elevation-md:     0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --elevation-lg:     0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+    --elevation-xl:     0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+    --elevation-2xl:    0 25px 50px -12px rgb(0 0 0 / 0.6);
+  }
+}
+
+[data-theme="dark"] {
+  --color-bg-canvas:   var(--primitive-slate-950, #020617);
+  --color-bg-surface:  var(--primitive-slate-900, #0F172A);
+  --color-bg-elevated: var(--primitive-slate-800, #1E293B);
+  --color-bg-inset:    var(--primitive-slate-800, #1E293B);
+  --color-bg-subtle:   var(--primitive-slate-900, #0F172A);
+  --color-bg-overlay:  rgb(2 6 23 / 0.7);
+  --color-bg-code:     var(--primitive-slate-950, #020617);
+
+  --color-text-primary:   var(--primitive-slate-50,  #F8FAFC);
+  --color-text-secondary: var(--primitive-slate-300, #CBD5E1);
+  --color-text-tertiary:  var(--primitive-slate-500, #64748B);
+  --color-text-disabled:  var(--primitive-slate-600, #475569);
+  --color-text-inverse:   var(--primitive-slate-900, #0F172A);
+
+  --color-link-default: var(--primitive-indigo-400, #818CF8);
+  --color-link-hover:   var(--primitive-indigo-300, #A5B4FC);
+  --color-link-active:  var(--primitive-indigo-200, #C7D2FE);
+
+  --color-border-default: var(--primitive-slate-700, #334155);
+  --color-border-strong:  var(--primitive-slate-600, #475569);
+  --color-border-muted:   var(--primitive-slate-800, #1E293B);
+
+  --color-interactive-secondary:        var(--primitive-slate-800, #1E293B);
+  --color-interactive-secondary-hover:  var(--primitive-slate-700, #334155);
+  --color-interactive-secondary-active: var(--primitive-slate-600, #475569);
+  --color-interactive-secondary-fg:     var(--primitive-slate-200, #E2E8F0);
+  --color-interactive-secondary-border: var(--primitive-slate-600, #475569);
+
+  --color-interactive-ghost-hover:  var(--primitive-slate-800, #1E293B);
+  --color-interactive-ghost-active: var(--primitive-slate-700, #334155);
+  --color-interactive-ghost-fg:     var(--primitive-slate-300, #CBD5E1);
+
+  --elevation-xs:  0 1px 2px 0 rgb(0 0 0 / 0.2);
+  --elevation-sm:  0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+  --elevation-md:  0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --elevation-lg:  0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+  --elevation-xl:  0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+  --elevation-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.6);
+}

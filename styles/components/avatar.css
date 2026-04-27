@@ -1,0 +1,116 @@
+@import url('../../tokens.css');
+
+/* ============================================================
+   AVATAR — user image or initials representation
+   Layer 3: references Layer 2 aliases only, never raw values.
+   ============================================================ */
+
+.avatar {
+  display:          inline-flex;
+  align-items:      center;
+  justify-content:  center;
+  border-radius:    var(--radius-avatar);
+  overflow:         hidden;
+  flex-shrink:      0;
+  background-color: var(--color-interactive-primary-subtle);
+  color:            var(--color-interactive-primary);
+  font-family:      var(--font-family-body);
+  font-weight:      var(--font-weight-semibold);
+  border:           2px solid var(--color-bg-surface);
+  position:         relative;
+}
+
+/* Sizes */
+.avatar--xs {
+  width:     var(--space-6);
+  height:    var(--space-6);
+  font-size: var(--font-size-xs);
+}
+
+.avatar--sm {
+  width:     var(--space-8);
+  height:    var(--space-8);
+  font-size: var(--font-size-xs);
+}
+
+.avatar--md {
+  width:     var(--space-10);
+  height:    var(--space-10);
+  font-size: var(--font-size-sm);
+}
+
+.avatar--lg {
+  width:     var(--space-12);
+  height:    var(--space-12);
+  font-size: var(--font-size-base);
+}
+
+.avatar--xl {
+  width:     var(--space-16);
+  height:    var(--space-16);
+  font-size: var(--font-size-xl);
+}
+
+/* Image avatar */
+.avatar__img {
+  width:       100%;
+  height:      100%;
+  object-fit:  cover;
+  border-radius: inherit;
+}
+
+/* Square variant */
+.avatar--square {
+  border-radius: var(--radius-lg);
+}
+
+.avatar--square.avatar--sm { border-radius: var(--radius-md); }
+.avatar--square.avatar--lg { border-radius: var(--radius-xl); }
+
+/* Status indicator */
+.avatar-wrapper {
+  position: relative;
+  display:  inline-flex;
+}
+
+.avatar__status {
+  position:         absolute;
+  bottom:           0;
+  right:            0;
+  width:            var(--space-3);
+  height:           var(--space-3);
+  border-radius:    var(--radius-full);
+  border:           2px solid var(--color-bg-surface);
+}
+
+.avatar__status--online   { background-color: var(--color-status-success); }
+.avatar__status--away     { background-color: var(--color-status-warning); }
+.avatar__status--busy     { background-color: var(--color-status-error); }
+.avatar__status--offline  { background-color: var(--color-text-disabled); }
+
+/* Avatar group (stacked) */
+.avatar-group {
+  display:     inline-flex;
+  flex-direction: row-reverse;
+}
+
+.avatar-group .avatar {
+  margin-left: calc(-1 * var(--space-2));
+  transition:  transform var(--duration-normal) var(--ease-default);
+}
+
+.avatar-group .avatar:hover {
+  transform: translateY(calc(-1 * var(--space-1)));
+  z-index:   var(--z-raised);
+}
+
+.avatar-group .avatar:last-child {
+  margin-left: 0;
+}
+
+.avatar-group__overflow {
+  background-color: var(--color-bg-inset);
+  color:            var(--color-text-secondary);
+  border-color:     var(--color-border-default);
+  border-style:     solid;
+}

@@ -1,0 +1,162 @@
+@import url('../tokens.css');
+
+/* ============================================================
+   BASE STYLES — global resets and document defaults
+   All values reference Layer 2 tokens only.
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 2;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:      var(--font-family-body);
+  font-size:        var(--font-size-base);
+  font-weight:      var(--font-weight-normal);
+  line-height:      var(--line-height-normal);
+  color:            var(--color-text-primary);
+  background-color: var(--color-bg-canvas);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family:    var(--font-family-heading);
+  font-weight:    var(--font-weight-bold);
+  line-height:    var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color:          var(--color-text-primary);
+}
+
+h1 { font-size: var(--font-size-5xl); }
+h2 { font-size: var(--font-size-4xl); }
+h3 { font-size: var(--font-size-3xl); }
+h4 { font-size: var(--font-size-2xl); }
+h5 { font-size: var(--font-size-xl); }
+h6 { font-size: var(--font-size-lg); }
+
+p {
+  color:       var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+a {
+  color:           var(--color-link-default);
+  text-decoration: underline;
+  transition:      var(--transition-colors);
+}
+
+a:hover  { color: var(--color-link-hover); }
+a:active { color: var(--color-link-active); }
+
+strong, b { font-weight: var(--font-weight-semibold); }
+
+em, i { font-style: italic; }
+
+code, kbd, samp, pre {
+  font-family: var(--font-family-code);
+  font-size:   var(--font-size-code-relative);
+}
+
+code {
+  background-color: var(--color-bg-inset);
+  color:            var(--color-link-default);
+  padding:          var(--space-1) var(--space-2);
+  border-radius:    var(--radius-base);
+  border:           1px solid var(--color-border-muted);
+}
+
+pre {
+  background-color: var(--color-bg-code);
+  color:            var(--color-text-on-code);
+  padding:          var(--space-6);
+  border-radius:    var(--radius-code);
+  overflow-x:       auto;
+  font-size:        var(--font-size-sm);
+  line-height:      var(--line-height-relaxed);
+}
+
+pre code {
+  background-color: transparent;
+  color:            inherit;
+  padding:          0;
+  border:           none;
+  border-radius:    var(--radius-none);
+  font-size:        inherit;
+}
+
+hr {
+  border:     none;
+  border-top: 1px solid var(--color-border-default);
+  margin:     var(--space-8) 0;
+}
+
+blockquote {
+  border-left:  4px solid var(--color-border-focus);
+  padding-left: var(--space-4);
+  color:        var(--color-text-secondary);
+  font-style:   italic;
+}
+
+ul, ol {
+  padding-left: var(--space-6);
+  color:        var(--color-text-secondary);
+  line-height:  var(--line-height-relaxed);
+}
+
+li + li { margin-top: var(--space-1); }
+
+img, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Focus visible — applies to all interactive elements */
+:focus-visible {
+  outline:        var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-interactive-primary-subtle);
+  color:            var(--color-text-primary);
+}
+
+/* Scrollbar (webkit) */
+::-webkit-scrollbar       { width: var(--space-2); height: var(--space-2); }
+::-webkit-scrollbar-track { background: var(--color-bg-inset); }
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-border-strong);
+  border-radius:    var(--radius-full);
+  border:           2px solid var(--color-bg-inset);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration:   var(--duration-instant) !important;
+    animation-iteration-count: 1 !important;
+    transition-duration:  var(--duration-instant) !important;
+    scroll-behavior:      auto !important;
+  }
+}

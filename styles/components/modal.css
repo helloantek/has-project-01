@@ -1,0 +1,171 @@
+@import url('../../tokens.css');
+
+/* ============================================================
+   MODAL / DIALOG — overlay panel for focused interactions
+   Layer 3: references Layer 2 aliases only, never raw values.
+   ============================================================ */
+
+/* Overlay backdrop */
+.modal-backdrop {
+  position:         fixed;
+  inset:            0;
+  background-color: var(--color-bg-overlay);
+  z-index:          var(--z-overlay);
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  padding:          var(--space-4);
+  backdrop-filter:  blur(var(--space-1));
+  animation:        backdrop-in var(--duration-normal) var(--ease-default);
+}
+
+/* Modal container */
+.modal {
+  position:         relative;
+  background-color: var(--color-bg-surface);
+  border:           1px solid var(--color-border-default);
+  border-radius:    var(--radius-modal);
+  box-shadow:       var(--elevation-modal);
+  width:            100%;
+  max-width:        var(--space-24);
+  max-height:       calc(100vh - var(--space-16));
+  display:          flex;
+  flex-direction:   column;
+  z-index:          var(--z-modal);
+  animation:        modal-in var(--duration-slow) var(--ease-spring);
+  overflow:         hidden;
+}
+
+/* Sizes */
+.modal--sm  { max-width: var(--space-20); }
+.modal--md  { max-width: var(--space-24); }
+.modal--lg  { max-width: var(--layout-content-width); }
+.modal--xl  { max-width: var(--layout-max-width); }
+.modal--full {
+  max-width:  none;
+  width:      calc(100vw - var(--space-8));
+  max-height: calc(100vh - var(--space-8));
+}
+
+/* Modal sections */
+.modal__header {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  gap:             var(--space-4);
+  padding:         var(--space-5) var(--space-6);
+  border-bottom:   1px solid var(--color-border-muted);
+  flex-shrink:     0;
+}
+
+.modal__title {
+  font-size:   var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color:       var(--color-text-primary);
+  line-height: var(--line-height-snug);
+}
+
+.modal__subtitle {
+  font-size:   var(--font-size-sm);
+  color:       var(--color-text-secondary);
+  margin-top:  var(--space-1);
+}
+
+.modal__close {
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  width:            var(--space-8);
+  height:           var(--space-8);
+  border:           none;
+  background:       transparent;
+  cursor:           pointer;
+  border-radius:    var(--radius-md);
+  color:            var(--color-text-tertiary);
+  flex-shrink:      0;
+  transition:       var(--transition-colors);
+}
+
+.modal__close:hover {
+  background-color: var(--color-interactive-ghost-hover);
+  color:            var(--color-text-primary);
+}
+
+.modal__body {
+  flex:       1;
+  overflow-y: auto;
+  padding:    var(--space-6);
+}
+
+.modal__footer {
+  display:         flex;
+  align-items:     center;
+  justify-content: flex-end;
+  gap:             var(--space-2);
+  padding:         var(--space-4) var(--space-6);
+  border-top:      1px solid var(--color-border-muted);
+  background:      var(--color-bg-subtle);
+  flex-shrink:     0;
+}
+
+.modal__footer--start { justify-content: flex-start; }
+.modal__footer--between { justify-content: space-between; }
+
+/* Drawer variant (slides from right) */
+.modal--drawer {
+  position:         fixed;
+  right:            0;
+  top:              0;
+  bottom:           0;
+  left:             auto;
+  max-width:        none;
+  width:            min(var(--space-32), 90vw);
+  max-height:       none;
+  border-radius:    var(--radius-2xl) var(--radius-none) var(--radius-none) var(--radius-2xl);
+  animation:        drawer-in var(--duration-slow) var(--ease-out);
+  margin:           0;
+}
+
+/* Animations */
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes modal-in {
+  from {
+    opacity:   0;
+    transform: scale(0.95) translateY(var(--space-2));
+  }
+  to {
+    opacity:   1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes drawer-in {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+@media (max-width: 640px) {
+  .modal {
+    max-width: none;
+    width:     100%;
+    max-height: 90vh;
+    border-radius: var(--radius-2xl) var(--radius-2xl) var(--radius-none) var(--radius-none);
+    position:   fixed;
+    bottom:     0;
+    left:       0;
+    right:      0;
+    margin:     0;
+    animation:  sheet-in var(--duration-slow) var(--ease-out);
+  }
+
+  .modal-backdrop { align-items: flex-end; padding: 0; }
+}
+
+@keyframes sheet-in {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}

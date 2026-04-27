@@ -1,0 +1,107 @@
+@import url('../tokens.css');
+
+/* ============================================================
+   LAYOUT — containers, grid, section wrappers
+   All values reference Layer 2 tokens only.
+   ============================================================ */
+
+.container {
+  width:     100%;
+  max-width: var(--layout-max-width);
+  margin:    0 auto;
+  padding:   0 var(--space-6);
+}
+
+.container--narrow {
+  max-width: var(--layout-content-width);
+}
+
+/* Page shell */
+.page-shell {
+  display:        flex;
+  flex-direction: column;
+  min-height:     100vh;
+  background:     var(--color-bg-canvas);
+}
+
+.page-main {
+  flex: 1;
+  padding-top:    var(--layout-nav-height);
+}
+
+/* Section wrappers */
+.section {
+  padding-top:    var(--space-section-md);
+  padding-bottom: var(--space-section-md);
+}
+
+.section--sm {
+  padding-top:    var(--space-section-sm);
+  padding-bottom: var(--space-section-sm);
+}
+
+.section--lg {
+  padding-top:    var(--space-section-lg);
+  padding-bottom: var(--space-section-lg);
+}
+
+.section--xl {
+  padding-top:    var(--space-section-xl);
+  padding-bottom: var(--space-section-xl);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap:     var(--space-6);
+}
+
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+.grid--auto {
+  grid-template-columns: repeat(auto-fill, minmax(var(--space-24), 1fr));
+}
+
+/* Flex helpers */
+.flex       { display: flex; }
+.flex-col   { flex-direction: column; }
+.items-center   { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
+
+/* Sidebar layout */
+.layout-sidebar {
+  display: grid;
+  grid-template-columns: var(--layout-sidebar-width) 1fr;
+  gap:     var(--space-8);
+  align-items: start;
+}
+
+/* Divider */
+.divider {
+  border:     none;
+  border-top: 1px solid var(--color-border-default);
+  margin:     var(--space-8) 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .grid--4 { grid-template-columns: repeat(2, 1fr); }
+  .grid--3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .container { padding: 0 var(--space-4); }
+  .grid--4,
+  .grid--3,
+  .grid--2 { grid-template-columns: 1fr; }
+  .layout-sidebar { grid-template-columns: 1fr; }
+}

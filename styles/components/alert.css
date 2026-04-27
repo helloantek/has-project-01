@@ -1,0 +1,151 @@
+@import url('../../tokens.css');
+
+/* ============================================================
+   ALERT / BANNER — informational and feedback messages
+   Layer 3: references Layer 2 aliases only, never raw values.
+   ============================================================ */
+
+.alert {
+  display:       flex;
+  gap:           var(--space-3);
+  padding:       var(--space-4);
+  border-radius: var(--radius-lg);
+  border:        1px solid transparent;
+  align-items:   flex-start;
+}
+
+.alert__icon {
+  flex-shrink:  0;
+  width:        var(--space-5);
+  height:       var(--space-5);
+  margin-top:   1px;
+}
+
+.alert__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.alert__title {
+  font-size:   var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+}
+
+.alert__body {
+  font-size:   var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  margin-top:  var(--space-1);
+}
+
+.alert__actions {
+  display:    flex;
+  gap:        var(--space-2);
+  margin-top: var(--space-3);
+  flex-wrap:  wrap;
+}
+
+.alert__close {
+  flex-shrink:      0;
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  width:            var(--space-6);
+  height:           var(--space-6);
+  border:           none;
+  background:       transparent;
+  cursor:           pointer;
+  border-radius:    var(--radius-base);
+  padding:          0;
+  transition:       var(--transition-colors);
+  color:            currentColor;
+  opacity:          0.7;
+}
+
+.alert__close:hover {
+  opacity:          1;
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+}
+
+/* Semantic variants */
+.alert--info {
+  background-color: var(--color-status-info-subtle);
+  border-color:     var(--color-status-info-border);
+  color:            var(--color-status-info-text);
+}
+
+.alert--success {
+  background-color: var(--color-status-success-subtle);
+  border-color:     var(--color-status-success-border);
+  color:            var(--color-status-success-text);
+}
+
+.alert--warning {
+  background-color: var(--color-status-warning-subtle);
+  border-color:     var(--color-status-warning-border);
+  color:            var(--color-status-warning-text);
+}
+
+.alert--error {
+  background-color: var(--color-status-error-subtle);
+  border-color:     var(--color-status-error-border);
+  color:            var(--color-status-error-text);
+}
+
+/* Bordered variant (left accent line) */
+.alert--bordered {
+  background-color: var(--color-bg-surface);
+  border-left-width: var(--space-1);
+  border-radius:    var(--radius-none) var(--radius-lg) var(--radius-lg) var(--radius-none);
+}
+
+.alert--bordered.alert--info    { border-left-color: var(--color-status-info); }
+.alert--bordered.alert--success { border-left-color: var(--color-status-success); }
+.alert--bordered.alert--warning { border-left-color: var(--color-status-warning); }
+.alert--bordered.alert--error   { border-left-color: var(--color-status-error); }
+
+/* Toast (transient alert) */
+.toast {
+  display:          flex;
+  align-items:      center;
+  gap:              var(--space-3);
+  padding:          var(--space-3) var(--space-4);
+  background-color: var(--color-bg-elevated);
+  border:           1px solid var(--color-border-default);
+  border-radius:    var(--radius-xl);
+  box-shadow:       var(--elevation-toast);
+  min-width:        var(--space-24);
+  max-width:        var(--space-32);
+  pointer-events:   all;
+  animation:        toast-in var(--duration-slow) var(--ease-spring);
+}
+
+.toast__message {
+  flex:        1;
+  font-size:   var(--font-size-sm);
+  color:       var(--color-text-primary);
+  line-height: var(--line-height-snug);
+}
+
+/* Toast container */
+.toast-container {
+  position:       fixed;
+  bottom:         var(--space-6);
+  right:          var(--space-6);
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--space-2);
+  z-index:        var(--z-toast);
+  pointer-events: none;
+}
+
+@keyframes toast-in {
+  from {
+    opacity:   0;
+    transform: translateY(var(--space-4));
+  }
+  to {
+    opacity:   1;
+    transform: translateY(0);
+  }
+}
