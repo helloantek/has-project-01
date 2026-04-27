@@ -1,0 +1,10 @@
+{
+  "name": "devl.dev Design System Generator",
+  "id": "devl-design-system-generator",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "permissions": ["currentuser"]
+}

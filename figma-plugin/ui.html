@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 13px;
+    background: #F8FAFC;
+    color: #0F172A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 16px;
+    padding: 24px;
+  }
+  .logo {
+    width: 48px; height: 48px;
+    background: #4F46E5;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 20px;
+  }
+  h1 { font-size: 16px; font-weight: 600; text-align: center; }
+  p  { font-size: 12px; color: #475569; text-align: center; line-height: 1.6; }
+  button {
+    width: 100%; padding: 10px 20px;
+    background: #4F46E5; color: white;
+    border: none; border-radius: 8px;
+    font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: background 0.15s;
+  }
+  button:hover { background: #4338CA; }
+  button:disabled { background: #A5B4FC; cursor: not-allowed; }
+  .progress {
+    font-size: 11px; color: #6366F1;
+    min-height: 16px; text-align: center;
+  }
+  .warning {
+    font-size: 11px; color: #D97706;
+    background: #FFFBEB; border: 1px solid #F59E0B;
+    border-radius: 6px; padding: 8px 12px;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+  <div class="logo">D</div>
+  <h1>devl.dev Design System</h1>
+  <p>Generates all token pages and component pages in this Figma file. Run in an <strong>empty file</strong>.</p>
+  <div class="warning">⚠ This will add 14 pages to the current file.</div>
+  <button id="btn" onclick="generate()">Generate Design System</button>
+  <div class="progress" id="progress"></div>
+
+<script>
+function generate() {
+  const btn = document.getElementById('btn');
+  btn.disabled = true;
+  btn.textContent = 'Generating…';
+  parent.postMessage({ pluginMessage: { type: 'generate' } }, '*');
+}
+window.onmessage = (event) => {
+  const msg = event.data.pluginMessage;
+  if (!msg) return;
+  if (msg.type === 'progress') {
+    document.getElementById('progress').textContent = msg.text;
+  }
+  if (msg.type === 'done') {
+    document.getElementById('progress').textContent = '✅ Done! ' + msg.pages + ' pages created.';
+    document.getElementById('btn').textContent = 'Done';
+  }
+  if (msg.type === 'error') {
+    document.getElementById('progress').textContent = '❌ Error: ' + msg.text;
+    document.getElementById('btn').disabled = false;
+    document.getElementById('btn').textContent = 'Retry';
+  }
+};
+</script>
+</body>
+</html>
