@@ -30,6 +30,10 @@ function hex(h) {
 }
 function solid(c)   { return [{ type: 'SOLID', color: { r: c.r, g: c.g, b: c.b }, opacity: c.a !== undefined ? c.a : 1 }]; }
 function noFill()   { return []; }
+// Only valid #-prefixed 3- or 6-digit hex strings produce a fill.
+// Anything else (null, undefined, '', 'transparent', etc.) → no fill.
+function isHex(v) { return typeof v === 'string' && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v); }
+function fillFromHex(v) { return isHex(v) ? solid(hex(v)) : noFill(); }
 function stroke(c, w = 1) { return [{ type: 'SOLID', color: { r: c.r, g: c.g, b: c.b } }]; }
 
 // ─────────────────────────────────────────────────────────────
@@ -228,7 +232,7 @@ function makeText(str, size, fontKey, colorHex, parent) {
 function makeRect(w, h, colorHex, parent, opts = {}) {
   const r = figma.createRectangle();
   r.resize(w, h);
-  r.fills = colorHex ? solid(hex(colorHex)) : noFill();
+  r.fills = fillFromHex(colorHex);
   if (opts.radius !== undefined) r.cornerRadius = opts.radius;
   if (opts.stroke) {
     r.strokes = stroke(hex(opts.stroke));
@@ -253,7 +257,7 @@ function makeRect(w, h, colorHex, parent, opts = {}) {
 function makeFrame(w, h, colorHex, parent) {
   const f = figma.createFrame();
   f.resize(w, h);
-  f.fills = colorHex ? solid(hex(colorHex)) : noFill();
+  f.fills = fillFromHex(colorHex);
   f.clipsContent = false;
   if (parent) parent.appendChild(f);
   return f;
@@ -765,9 +769,8 @@ async function buildNavigationPage(page) {
   let nlx = 200;
   for (const nl of navLinks) {
     const isActive = nl === 'Docs';
-    const linkBg = makeRect(isActive ? 72 : 0, isActive ? 32 : 0, isActive ? '#EEF2FF' : 'transparent', navBar, { radius: 6 });
+    const linkBg = makeRect(isActive ? 72 : 0, isActive ? 32 : 0, isActive ? '#EEF2FF' : null, navBar, { radius: 6 });
     linkBg.x = nlx - 10; linkBg.y = 16;
-    if (!isActive) linkBg.fills = noFill();
     const lt = makeText(nl, 13, 'medium', isActive ? '#4F46E5' : '#475569', navBar);
     lt.x = nlx; lt.y = 23;
     nlx += lt.width + 28;
