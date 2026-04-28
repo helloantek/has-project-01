@@ -305,12 +305,12 @@ function getOrCreatePage(name) {
 // PAGE: 🎨 PRIMITIVES
 // ─────────────────────────────────────────────────────────────
 async function buildPrimitivesPage(page) {
-  figma.currentPage = page;
+  await figma.setCurrentPageAsync(page);
   setPageBg(page, '#F1F5F9');
 
   const canvas = makeFrame(1800, 3600, '#F1F5F9', null);
   canvas.name = 'Primitives';
-  figma.currentPage.appendChild(canvas);
+  page.appendChild(canvas);
 
   const ML = 80; // left margin
   let y = 80;
@@ -420,12 +420,12 @@ async function buildPrimitivesPage(page) {
 // PAGE: 🔗 ALIASES
 // ─────────────────────────────────────────────────────────────
 async function buildAliasesPage(page) {
-  figma.currentPage = page;
+  await figma.setCurrentPageAsync(page);
   setPageBg(page, '#F1F5F9');
 
   const canvas = makeFrame(1800, 3200, '#F1F5F9', null);
   canvas.name = 'Aliases';
-  figma.currentPage.appendChild(canvas);
+  page.appendChild(canvas);
 
   const ML = 80;
   let y = 80;
@@ -487,12 +487,12 @@ async function buildAliasesPage(page) {
 // ─────────────────────────────────────────────────────────────
 // SHARED COMPONENT-PAGE SCAFFOLD
 // ─────────────────────────────────────────────────────────────
-function componentPageSetup(page, title, subtitle) {
-  figma.currentPage = page;
+async function componentPageSetup(page, title, subtitle) {
+  await figma.setCurrentPageAsync(page);
   setPageBg(page, '#F1F5F9');
   const canvas = makeFrame(1800, 4000, '#F1F5F9', null);
   canvas.name = title;
-  figma.currentPage.appendChild(canvas);
+  page.appendChild(canvas);
   let y = 80;
   pageTitle(title, 80, y, canvas); y += 48;
   const st = makeText(subtitle, 13, 'regular', '#64748B', canvas);
@@ -518,7 +518,7 @@ function groupFrame(label, x, y, w, h, parent) {
 // PAGE: ⚡ BUTTON
 // ─────────────────────────────────────────────────────────────
 async function buildButtonPage(page) {
-  let { canvas, y } = componentPageSetup(page, '⚡ Button', 'All variants, sizes, and states. tokens.css → styles/components/button.css');
+  let { canvas, y } = await componentPageSetup(page, '⚡ Button', 'All variants, sizes, and states. tokens.css → styles/components/button.css');
 
   // ── Variants row ──────────────────────────────────────────
   sectionLabel('Variants', 80, y, canvas); y += 28;
@@ -605,7 +605,7 @@ async function buildButtonPage(page) {
 // PAGE: 🃏 CARD
 // ─────────────────────────────────────────────────────────────
 async function buildCardPage(page) {
-  let { canvas, y } = componentPageSetup(page, '🃏 Card', 'Content container surface. tokens.css → styles/components/card.css');
+  let { canvas, y } = await componentPageSetup(page, '🃏 Card', 'Content container surface. tokens.css → styles/components/card.css');
 
   // Standard card
   sectionLabel('Standard Card', 80, y, canvas); y += 28;
@@ -658,7 +658,7 @@ async function buildCardPage(page) {
 // PAGE: 📝 INPUT
 // ─────────────────────────────────────────────────────────────
 async function buildInputPage(page) {
-  let { canvas, y } = componentPageSetup(page, '📝 Input', 'Form controls. tokens.css → styles/components/input.css');
+  let { canvas, y } = await componentPageSetup(page, '📝 Input', 'Form controls. tokens.css → styles/components/input.css');
 
   // Helper: draw an input field
   function drawInput(label, placeholder, state, x, yy, parent) {
@@ -747,7 +747,7 @@ async function buildInputPage(page) {
 // PAGE: 🧭 NAVIGATION
 // ─────────────────────────────────────────────────────────────
 async function buildNavigationPage(page) {
-  let { canvas, y } = componentPageSetup(page, '🧭 Navigation', 'Top nav bar, sidebar nav, breadcrumb. styles/components/navigation.css');
+  let { canvas, y } = await componentPageSetup(page, '🧭 Navigation', 'Top nav bar, sidebar nav, breadcrumb. styles/components/navigation.css');
 
   // Top nav bar
   sectionLabel('Top Navigation Bar', 80, y, canvas); y += 28;
@@ -835,7 +835,7 @@ async function buildNavigationPage(page) {
 // PAGE: 🏷 BADGE
 // ─────────────────────────────────────────────────────────────
 async function buildBadgePage(page) {
-  let { canvas, y } = componentPageSetup(page, '🏷 Badge', 'Status labels, tags, count indicators. styles/components/badge.css');
+  let { canvas, y } = await componentPageSetup(page, '🏷 Badge', 'Status labels, tags, count indicators. styles/components/badge.css');
 
   const badgeData = [
     { lbl:'Default', bg:'#F1F5F9', fg:'#475569', border:'#E2E8F0' },
@@ -850,11 +850,6 @@ async function buildBadgePage(page) {
   sectionLabel('Subtle Variants', 80, y, canvas); y += 28;
   let bx = 80;
   for (const b of badgeData) {
-    const pad = 8;
-    const bt = makeText(b.lbl, 11, 'medium', b.fg, null);
-    const w = bt.width + pad * 2 + 16; // extra for dot
-    figma.currentPage.appendChild(bt); bt.remove();
-
     const bf = makeFrame(80, 24, b.bg, canvas);
     bf.x = bx; bf.y = y; bf.cornerRadius = 999;
     bf.strokes = stroke(hex(b.border)); bf.strokeWeight = 1; bf.strokeAlign = 'INSIDE';
@@ -920,7 +915,7 @@ async function buildBadgePage(page) {
 // PAGE: 💻 CODE BLOCK
 // ─────────────────────────────────────────────────────────────
 async function buildCodeBlockPage(page) {
-  let { canvas, y } = componentPageSetup(page, '💻 Code Block', 'Syntax display, terminal, inline code. styles/components/code-block.css');
+  let { canvas, y } = await componentPageSetup(page, '💻 Code Block', 'Syntax display, terminal, inline code. styles/components/code-block.css');
 
   // Standard code block
   sectionLabel('Code Block with Header', 80, y, canvas); y += 28;
@@ -981,7 +976,7 @@ async function buildCodeBlockPage(page) {
 // PAGE: 👤 AVATAR
 // ─────────────────────────────────────────────────────────────
 async function buildAvatarPage(page) {
-  let { canvas, y } = componentPageSetup(page, '👤 Avatar', 'User identity. sizes, status, groups. styles/components/avatar.css');
+  let { canvas, y } = await componentPageSetup(page, '👤 Avatar', 'User identity. sizes, status, groups. styles/components/avatar.css');
 
   // Sizes
   sectionLabel('Sizes', 80, y, canvas); y += 28;
@@ -1071,7 +1066,7 @@ async function buildAvatarPage(page) {
 // PAGE: ⚠️ ALERT
 // ─────────────────────────────────────────────────────────────
 async function buildAlertPage(page) {
-  let { canvas, y } = componentPageSetup(page, '⚠️ Alert', 'Inline feedback and transient toasts. styles/components/alert.css');
+  let { canvas, y } = await componentPageSetup(page, '⚠️ Alert', 'Inline feedback and transient toasts. styles/components/alert.css');
 
   const alerts = [
     { lbl:'Info',    bg:'#EEF2FF', border:'#6366F1', titleClr:'#4338CA', icon:'ℹ', msg:'Your account settings have been updated successfully.' },
@@ -1128,7 +1123,7 @@ async function buildAlertPage(page) {
 // PAGE: 📦 MODAL
 // ─────────────────────────────────────────────────────────────
 async function buildModalPage(page) {
-  let { canvas, y } = componentPageSetup(page, '📦 Modal', 'Dialog overlay and drawer. styles/components/modal.css');
+  let { canvas, y } = await componentPageSetup(page, '📦 Modal', 'Dialog overlay and drawer. styles/components/modal.css');
 
   // Backdrop + dialog
   sectionLabel('Dialog (default)', 80, y, canvas); y += 28;
@@ -1178,7 +1173,7 @@ async function buildModalPage(page) {
 // PAGE: 📊 TABLE
 // ─────────────────────────────────────────────────────────────
 async function buildTablePage(page) {
-  let { canvas, y } = componentPageSetup(page, '📊 Table', 'Data grid with sorting, selection, pagination. styles/components/table.css');
+  let { canvas, y } = await componentPageSetup(page, '📊 Table', 'Data grid with sorting, selection, pagination. styles/components/table.css');
 
   sectionLabel('Data Table', 80, y, canvas); y += 28;
 
@@ -1275,7 +1270,9 @@ async function buildTablePage(page) {
 // MAIN RUNNER
 // ─────────────────────────────────────────────────────────────
 async function run() {
-  figma.ui.postMessage({ type: 'progress', text: 'Loading fonts…' });
+  figma.ui.postMessage({ type: 'progress', text: 'Loading pages and fonts…' });
+  // dynamic-page mode requires explicitly loading all pages before traversal
+  await figma.loadAllPagesAsync();
   await loadFonts();
 
   figma.ui.postMessage({ type: 'progress', text: 'Creating Figma Variables…' });
@@ -1310,5 +1307,5 @@ async function run() {
 
   // Focus on Primitives page
   const first = figma.root.children.find(p => p.name === '🎨 Primitives');
-  if (first) figma.currentPage = first;
+  if (first) await figma.setCurrentPageAsync(first);
 }
