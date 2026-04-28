@@ -28,7 +28,7 @@ function hex(h) {
     b: parseInt(h.slice(4, 6), 16) / 255,
   };
 }
-function solid(c)   { return [{ type: 'SOLID', color: { r: c.r, g: c.g, b: c.b }, opacity: c.a ?? 1 }]; }
+function solid(c)   { return [{ type: 'SOLID', color: { r: c.r, g: c.g, b: c.b }, opacity: c.a !== undefined ? c.a : 1 }]; }
 function noFill()   { return []; }
 function stroke(c, w = 1) { return [{ type: 'SOLID', color: { r: c.r, g: c.g, b: c.b } }]; }
 
@@ -216,7 +216,7 @@ async function loadFonts() {
 // Create a text node
 function makeText(str, size, fontKey, colorHex, parent) {
   const t = figma.createText();
-  t.fontName  = FONTS[fontKey] ?? FONTS.regular;
+  t.fontName  = FONTS[fontKey] !== undefined ? FONTS[fontKey] : FONTS.regular;
   t.fontSize  = size;
   t.characters = String(str);
   t.fills     = solid(hex(colorHex));
@@ -232,16 +232,16 @@ function makeRect(w, h, colorHex, parent, opts = {}) {
   if (opts.radius !== undefined) r.cornerRadius = opts.radius;
   if (opts.stroke) {
     r.strokes = stroke(hex(opts.stroke));
-    r.strokeWeight = opts.strokeWeight ?? 1;
+    r.strokeWeight = opts.strokeWeight !== undefined ? opts.strokeWeight : 1;
     r.strokeAlign = 'INSIDE';
   }
   if (opts.shadow) {
     r.effects = [{
       type: 'DROP_SHADOW',
-      color: { r: 0, g: 0, b: 0, a: opts.shadow.a ?? 0.1 },
-      offset: { x: opts.shadow.x ?? 0, y: opts.shadow.y ?? 4 },
-      radius: opts.shadow.blur ?? 6,
-      spread: opts.shadow.spread ?? 0,
+      color: { r: 0, g: 0, b: 0, a: opts.shadow.a !== undefined ? opts.shadow.a : 0.1 },
+      offset: { x: opts.shadow.x !== undefined ? opts.shadow.x : 0, y: opts.shadow.y !== undefined ? opts.shadow.y : 4 },
+      radius: opts.shadow.blur !== undefined ? opts.shadow.blur : 6,
+      spread: opts.shadow.spread !== undefined ? opts.shadow.spread : 0,
       visible: true, blendMode: 'NORMAL',
     }];
   }
