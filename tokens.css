@@ -394,6 +394,33 @@
   --layout-content-width: 768px;
   --layout-sidebar-width: 256px;
   --layout-nav-height:    64px;
+
+  /* --- Mail client layout --- */
+  --layout-mail-sidebar:    260px;
+  --layout-mail-list:       360px;
+  --layout-composer-width:  520px;
+  --layout-composer-height: 600px;
+
+  /* --- Avatar / icon sizes --- */
+  --size-avatar-xs:  28px;
+  --size-avatar-sm:  var(--primitive-space-8,  32px);
+  --size-avatar-md:  var(--primitive-space-10, 40px);
+  --size-icon-sm:    var(--primitive-space-8,  32px);
+
+  /* --- Email row dimensions --- */
+  --size-email-row-height: var(--primitive-space-12, 48px);
+  --size-email-sender-col: calc(var(--primitive-space-32, 128px) + var(--primitive-space-3, 12px));
+  --size-email-date-col:   var(--primitive-space-12, 48px);
+  --size-email-subject-max: calc(var(--primitive-space-32, 128px) + var(--primitive-space-20, 80px));
+
+  /* --- Composer label width --- */
+  --size-composer-label:  var(--primitive-space-12, 48px);
+
+  /* --- Skeleton bar height --- */
+  --size-skeleton-bar: var(--primitive-space-3, 12px);
+
+  /* --- Focus ring shorthand --- */
+  --elevation-focus-ring: 0 0 0 var(--focus-ring-width) var(--focus-ring-color);
 }
 
 /* ============================================================
